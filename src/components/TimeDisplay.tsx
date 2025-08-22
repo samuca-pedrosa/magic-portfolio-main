@@ -11,13 +11,9 @@ const TimeDisplay: React.FC<TimeDisplayProps> = ({
   timeZone, 
   locale = "en-GB" 
 }) => {
-  const [currentTime, setCurrentTime] = useState("");
-  const [hasMounted, setHasMounted] = useState(false);
+  const [currentTime, setCurrentTime] = useState<string | null>(null);
 
   useEffect(() => {
-    // Marcar que o componente montou no cliente
-    setHasMounted(true);
-    
     const updateTime = () => {
       const now = new Date();
       const options: Intl.DateTimeFormatOptions = {
@@ -37,8 +33,8 @@ const TimeDisplay: React.FC<TimeDisplayProps> = ({
     return () => clearInterval(intervalId);
   }, [timeZone, locale]);
 
-  // Não renderizar nada até que o componente monte no cliente
-  if (!hasMounted) {
+  // Não renderizar nada até que o tempo seja definido no cliente
+  if (currentTime === null) {
     return null;
   }
 

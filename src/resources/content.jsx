@@ -15,7 +15,7 @@ const person = {
 
 const newsletter = {
   display: true,
-  title: <>Subscribe to {person.firstName}'s Instagram</>,
+  title: <>Subscribe to {person.firstName}&apos;s Instagram</>,
   description: (
     <>
       I occasionally post about design, technology, and share thoughts on the intersection of
@@ -63,7 +63,7 @@ const home = {
   },
   subline: (
     <>
-      I'm Pedrosa, a Full Stack Developer at BairesDev, where I craft intuitive
+      I&apos;m Pedrosa, a Full Stack Developer at BairesDev, where I craft intuitive
       <br /> user experiences. After hours, I build my own projects.
     </>
   ),
@@ -90,7 +90,7 @@ const about = {
     title: "Introduction",
     description: (
       <>
-        My name is Samuel Pedrosa, or "Pedrosa." I'm the creator of Codersam, a frontend and backend learning resource that aims to help people become professional developers. I've been working in this field since 2024. I'm currently a freelancer and work for a company as a full-stack developer. I develop modern, high-quality interfaces, focusing on performance, animations, responsiveness, and SEO. I also develop or improve backend projects.
+        My name is Samuel Pedrosa, or &ldquo;Pedrosa.&rdquo; I&apos;m the creator of Codersam, a frontend and backend learning resource that aims to help people become professional developers. I&apos;ve been working in this field since 2024. I&apos;m currently a freelancer and work for a company as a full-stack developer. I develop modern, high-quality interfaces, focusing on performance, animations, responsiveness, and SEO. I also develop or improve backend projects.
       </>
     ),
   },
@@ -160,7 +160,7 @@ const about = {
     skills: [
       {
         title: "Frontend",
-        description: <>I build interactive, complete and innovative interfaces, I work with Figma, Reac t, Vue.js, advanced Html+css, Etc.</>,
+        description: <>I build interactive, complete and innovative interfaces, I work with Figma, React, Vue.js, advanced Html+css, Etc.</>,
         // optional: leave the array empty if you don't want to display images
         images: [
           {

@@ -2,6 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import dynamic from "next/dynamic";
+import { useEffect, useState } from "react";
 
 import { Fade, Flex, Line, ToggleButton } from "@once-ui-system/core";
 
@@ -18,11 +19,16 @@ type TimeDisplayProps = {
 // Dynamic import do TimeDisplay - sem SSR para evitar hydratação
 const TimeDisplay = dynamic(() => import("./TimeDisplay"), {
   ssr: false,
-  loading: () => null // Loading null para evitar flash
+  loading: () => <span style={{ width: '60px', display: 'inline-block' }}></span>
 }) as React.ComponentType<TimeDisplayProps>;
 
 export const Header = () => {
   const pathname = usePathname() ?? "";
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   return (
     <>
@@ -143,7 +149,9 @@ export const Header = () => {
             gap="20"
           >
             <Flex hide="s">
-              {display.time && <TimeDisplay timeZone={person.location} />}
+              {isClient && display.time && (
+                <TimeDisplay timeZone={person.location} />
+              )}
             </Flex>
           </Flex>
         </Flex>

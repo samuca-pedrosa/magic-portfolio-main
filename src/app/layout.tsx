@@ -1,8 +1,10 @@
 import '@once-ui-system/core/css/styles.css';
 import '@once-ui-system/core/css/tokens.css';
 import '@/resources/custom.css'
+import '@/resources/performance.css'
 
 import classNames from "classnames";
+import { Suspense } from "react";
 
 import { Background, Column, Flex, Meta, opacity, SpacingToken } from "@once-ui-system/core";
 import { Footer, Header, RouteGuard, Providers } from '@/components';
@@ -16,6 +18,25 @@ export async function generateMetadata() {
     path: home.path,
     image: home.image,
   });
+}
+
+// Loading component otimizado
+function PageLoading() {
+  return (
+    <Flex fillWidth horizontal="center" vertical="center" style={{ minHeight: '50vh' }}>
+      <div 
+        className="loading-spinner"
+        style={{ 
+          width: '24px', 
+          height: '24px', 
+          border: '2px solid var(--neutral-alpha-weak)',
+          borderTop: '2px solid var(--brand-background-strong)',
+          borderRadius: '50%',
+          animation: 'spin 1s linear infinite'
+        }} 
+      />
+    </Flex>
+  );
 }
 
 export default async function RootLayout({
@@ -173,7 +194,9 @@ export default async function RootLayout({
             }}
           />
           <Flex fillWidth minHeight="16" hide="s" suppressHydrationWarning />
-          <Header />
+          <Suspense fallback={null}>
+            <Header />
+          </Suspense>
           <Flex
             zIndex={0}
             fillWidth
@@ -184,11 +207,15 @@ export default async function RootLayout({
           >
             <Flex horizontal="center" fillWidth minHeight="0">
               <RouteGuard>
-                {children}
+                <Suspense fallback={<PageLoading />}>
+                  {children}
+                </Suspense>
               </RouteGuard>
             </Flex>
           </Flex>
-          <Footer />
+          <Suspense fallback={null}>
+            <Footer />
+          </Suspense>
         </Column>
       </Providers>
     </Flex>
